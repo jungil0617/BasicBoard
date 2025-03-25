@@ -1,5 +1,6 @@
 package jungil0617.BasicBoard.user.controller;
 
+import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
 import jungil0617.BasicBoard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,12 @@ public class UserController {
     public ResponseEntity<String> signup(@RequestBody UserSignupRequestDto requestDto) {
         userService.signup(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("회원가입");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody UserLoginRequestDto requestDto) {
+        String accessToken = userService.login(requestDto);
+        return ResponseEntity.ok(accessToken);
     }
 
 }

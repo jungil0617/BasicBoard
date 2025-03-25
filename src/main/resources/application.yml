@@ -22,7 +22,7 @@ spring:
       path: /h2-console
 
 jwt:
-  secret: your-super-secret-jwt-key
+  secret: jwt-secret-key-for-basic-board-api-2025
 
 springdoc:
   swagger-ui:

@@ -1,4 +1,4 @@
-package jungil0617.BasicBoard.global;
+package jungil0617.BasicBoard.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +25,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(new AntPathRequestMatcher("/users/signup")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/users/login")).permitAll()
                     .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable);

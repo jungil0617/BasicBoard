@@ -1,5 +1,7 @@
 package jungil0617.BasicBoard.user.service;
 
+import jungil0617.BasicBoard.global.jwt.JwtTokenProvider;
+import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
 import jungil0617.BasicBoard.user.entity.User;
 import jungil0617.BasicBoard.user.repository.UserRepository;
@@ -14,6 +16,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
     public void signup(UserSignupRequestDto requestDto) {
@@ -30,6 +33,24 @@ public class UserService {
         );
 
         userRepository.save(user);
+    }
+
+    @Transactional
+    public String login(UserLoginRequestDto requestDto) {
+        User user = userRepository.findByUsername(requestDto.getUsername())
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
+        String accessToken = jwtTokenProvider.generateAccessToken(user.getUsername());
+        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUsername());
+
+        user.updateRefreshToken(refreshToken);
+        userRepository.save(user);
+
+        return accessToken;
     }
 
 }
