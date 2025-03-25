@@ -37,6 +37,10 @@
 - 하드코딩된 숫자 또는 문자열을 사용하지 않는다. (상수와 이넘을 활용)
 - 접근제어자를 명확히 구분하고, 필요하지 않은 경우 public 사용을 지양한다.
 
+## ERD
+
+<img alt="Image" src="https://github.com/user-attachments/assets/bec94f7e-ff7c-48b7-94e5-a1ebbd557350" />
+
 ## 기능 요구 사항
 게시판
 - 글 작성, 수정, 삭제, 조회
