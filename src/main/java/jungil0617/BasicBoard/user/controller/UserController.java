@@ -6,10 +6,8 @@ import jungil0617.BasicBoard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +26,12 @@ public class UserController {
     public ResponseEntity<String> login(@RequestBody UserLoginRequestDto requestDto) {
         String accessToken = userService.login(requestDto);
         return ResponseEntity.ok(accessToken);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<String> getMyInfo(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(username);
     }
 
 }
