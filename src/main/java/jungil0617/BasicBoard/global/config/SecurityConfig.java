@@ -29,6 +29,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers(new AntPathRequestMatcher("/users/signup")).permitAll()
                     .requestMatchers(new AntPathRequestMatcher("/users/login")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/swagger-ui.html")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+                    .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
                     .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
