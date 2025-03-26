@@ -4,15 +4,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jungil0617.BasicBoard.post.dto.PostRequestDto;
+import jungil0617.BasicBoard.post.dto.PostResponseDto;
 import jungil0617.BasicBoard.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,6 +37,20 @@ public class PostController {
         postService.createPost(username, requestDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("게시글 작성 성공");
+    }
+
+    @GetMapping("/{postId}")
+    @Operation(
+        summary = "게시글 상세 조회",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "게시글 상세 조회 성공"),
+            @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음"),
+            @ApiResponse(responseCode = "401", description = "JWT 인증 실패")
+        }
+    )
+    public ResponseEntity<PostResponseDto> getPost(@PathVariable Long postId) {
+        PostResponseDto postResponseDto = postService.getPost(postId);
+        return ResponseEntity.ok(postResponseDto);
     }
 
 }
