@@ -53,4 +53,12 @@ public class UserService {
         return accessToken;
     }
 
+    @Transactional
+    public void updateNickname(String username, String newNickname) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        user.updateNickname(newNickname);
+    }
+
 }

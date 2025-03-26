@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
+import jungil0617.BasicBoard.user.dto.UserNicknameUpdateRequestDto;
 import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
 import jungil0617.BasicBoard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -55,6 +56,24 @@ public class UserController {
     public ResponseEntity<String> getMyInfo(Authentication authentication) {
         String username = authentication.getName();
         return ResponseEntity.ok(username);
+    }
+
+    @PatchMapping("/nickname")
+    @Operation(
+        summary = "닉네임 변경",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "닉네임 변경 성공"),
+            @ApiResponse(responseCode = "400", description = "요청 형식 오류"),
+            @ApiResponse(responseCode = "401", description = "인증 실패 또는 JWT 누락")
+        }
+    )
+    public ResponseEntity<String> updateNickname(
+            Authentication authentication,
+            @RequestBody UserNicknameUpdateRequestDto requestDto) {
+
+        String username = authentication.getName();
+        userService.updateNickname(username, requestDto.getNickname());
+        return ResponseEntity.ok(requestDto.getNickname());
     }
 
 }
