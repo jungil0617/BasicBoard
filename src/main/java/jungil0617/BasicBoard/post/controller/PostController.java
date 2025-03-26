@@ -53,4 +53,45 @@ public class PostController {
         return ResponseEntity.ok(postResponseDto);
     }
 
+    @PatchMapping("/{postId}")
+    @Operation(
+        summary = "게시글 수정",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "게시글 수정 성공"),
+            @ApiResponse(responseCode = "400", description = "잘못된 요청"),
+            @ApiResponse(responseCode = "401", description = "JWT 인증 실패"),
+            @ApiResponse(responseCode = "403", description = "작성자가 아님")
+        }
+    )
+    public ResponseEntity<String> updatePost(
+            @PathVariable Long postId,
+            @RequestBody PostRequestDto requestDto,
+            Authentication authentication) {
+
+        String username = authentication.getName();
+        postService.updatePost(postId, username, requestDto);
+
+        return ResponseEntity.ok("게시글 수정 성공");
+    }
+
+    @DeleteMapping("/{postId}")
+    @Operation(
+        summary = "게시글 삭제",
+        responses = {
+            @ApiResponse(responseCode = "204", description = "게시글 삭제 성공"),
+            @ApiResponse(responseCode = "400", description = "잘못된 요청"),
+            @ApiResponse(responseCode = "401", description = "JWT 인증 실패"),
+            @ApiResponse(responseCode = "403", description = "작성자가 아님")
+        }
+    )
+    public ResponseEntity<Void> deletePost(
+            @PathVariable Long postId,
+            Authentication authentication) {
+
+        String username = authentication.getName();
+        postService.deletePost(postId, username);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }

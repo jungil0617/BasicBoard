@@ -43,4 +43,28 @@ public class PostService {
         );
     }
 
+    @Transactional
+    public void updatePost(Long postId, String username, PostRequestDto requestDto) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+
+        if(!post.getUser().getUsername().equals(username)) {
+            throw new IllegalArgumentException("작성자만 수정할 수 있습니다.");
+        }
+
+        post.update(requestDto.getTitle(), requestDto.getContent());
+    }
+
+    @Transactional
+    public void deletePost(Long postId, String username) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+
+        if(!post.getUser().getUsername().equals(username)) {
+            throw new IllegalArgumentException("작성자만 삭제할 수 있습니다.");
+        }
+
+        postRepository.delete(post);
+    }
+
 }
