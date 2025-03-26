@@ -11,11 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final String[] permitAllUrls = {
+            "/users/signup", "/users/login", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**"};
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -27,11 +29,7 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers(new AntPathRequestMatcher("/users/signup")).permitAll()
-                    .requestMatchers(new AntPathRequestMatcher("/users/login")).permitAll()
-                    .requestMatchers(new AntPathRequestMatcher("/swagger-ui.html")).permitAll()
-                    .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
-                    .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                    .requestMatchers(permitAllUrls).permitAll()
                     .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
