@@ -61,4 +61,12 @@ public class UserService {
         user.updateNickname(newNickname);
     }
 
+    @Transactional
+    public void logout(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        user.updateRefreshToken(null);
+        userRepository.save(user);
+    }
+
 }

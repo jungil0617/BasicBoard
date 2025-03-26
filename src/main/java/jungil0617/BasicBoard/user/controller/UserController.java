@@ -45,6 +45,20 @@ public class UserController {
         return ResponseEntity.ok(accessToken);
     }
 
+    @DeleteMapping("/logout")
+    @Operation(
+        summary = "로그아웃",
+        responses = {
+            @ApiResponse(responseCode = "204", description = "로그아웃 성공"),
+            @ApiResponse(responseCode = "401", description = "JWT가 없거나 유효하지 않음")
+        }
+    )
+    public ResponseEntity<Void> logout(Authentication authentication) {
+        String username = authentication.getName();
+        userService.logout(username);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/me")
     @Operation(
         summary = "내 정보 조회",
