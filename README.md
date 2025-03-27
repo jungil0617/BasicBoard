@@ -41,6 +41,9 @@
 
 <img alt="Image" src="https://github.com/user-attachments/assets/bec94f7e-ff7c-48b7-94e5-a1ebbd557350" />
 
+## Postman
+<img alt="Image" src="https://github.com/user-attachments/assets/417e7e89-5fa9-4dd7-be00-0fc4efe4affa" />
+
 ## 기능 요구 사항
 게시판
 - 글 작성, 수정, 삭제, 조회
@@ -60,18 +63,22 @@
 
 회원 가입
 
-## 예외 처리 방식
+## 향후 개선점 및 리팩토링 고려사항
+- 예외 처리 통합 및 예외 클래스 세분화
+  - 현재는 IllegalArgumentException을 공통적으로 사용하고 있다
+- Swagger 403 에러 해결해야 함
+- 저장한 게시글 목록 조회
 
 ## TASK 설계
 - 프로젝트 초기 세팅
-  - 의존성 추가
+  - build.gradle 의존성 설정
   - H2, JPA 설정 및 테스트 DB 연결 확인
-  - Swagger
+  - JWT 및 Security 설정
+  - Swagger 설정
 
 - 회원 기능
   - 회원 가입 기능
-  - 로그인 기능
-  - JWT 및 Security 설정
+  - 로그인, 로그아웃 기능
   - 회원 정보 조회 및 닉네임 변경 기능
 
 - 게시글 기능
@@ -79,12 +86,16 @@
   - 조회 + 조회수 증가
   - 수정
   - 삭제
-  - 게시글 목록 조회 + 페이징
+  - 게시글 목록 조회 (페이징)
 
 - 좋아요 및 저장 기능
-  - 게시글 좋아요 + 취소 기능
-  - 게시글 저장 + 취소 기능
+  - 게시글 좋아요 / 취소 기능
+  - 게시글 저장 / 취소 기능
 
 - 댓글 기능
+  - 작성
+  - 조회
+  - 수정
+  - 삭제
 
 - Swagger API 문서화
