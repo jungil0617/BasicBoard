@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final String[] permitAllUrls = {
-            "/users/signup", "/users/login", "/swagger-ui.html", "/v3/api-docs/**",
+            "/users/signup", "/users/login", "/posts/*/likes", "/swagger-ui.html", "/v3/api-docs/**",
             "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/configuration/**"};
 
     @Bean
