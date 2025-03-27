@@ -1,5 +1,6 @@
 package jungil0617.BasicBoard.post.service;
 
+import jungil0617.BasicBoard.post.dto.PostListResponseDto;
 import jungil0617.BasicBoard.post.dto.PostRequestDto;
 import jungil0617.BasicBoard.post.dto.PostResponseDto;
 import jungil0617.BasicBoard.post.entity.Post;
@@ -7,6 +8,10 @@ import jungil0617.BasicBoard.post.repository.PostRepository;
 import jungil0617.BasicBoard.user.entity.User;
 import jungil0617.BasicBoard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,6 +70,17 @@ public class PostService {
         }
 
         postRepository.delete(post);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<PostListResponseDto> getAllPosts(int page, int size, String sortBy, String direction) {
+        Sort sort = direction.equalsIgnoreCase("asc") // 삼항연산자.. (오름차순, 내림차순)
+                ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return postRepository.findAll(pageable).map(PostListResponseDto::fromEntity);
     }
 
 }
