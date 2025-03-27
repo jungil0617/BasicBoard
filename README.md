@@ -42,7 +42,7 @@
 <img alt="Image" src="https://github.com/user-attachments/assets/bec94f7e-ff7c-48b7-94e5-a1ebbd557350" />
 
 ## Postman
-<img alt="Image" src="https://github.com/user-attachments/assets/417e7e89-5fa9-4dd7-be00-0fc4efe4affa" />
+<img width="281" alt="Image" src="https://github.com/user-attachments/assets/22c47bd0-90cd-420c-b51a-b989f1f8faec" />
 
 ## 기능 요구 사항
 게시판
