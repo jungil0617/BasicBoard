@@ -8,14 +8,11 @@ import jungil0617.BasicBoard.post.dto.PostRequestDto;
 import jungil0617.BasicBoard.post.dto.PostResponseDto;
 import jungil0617.BasicBoard.post.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -111,7 +108,7 @@ public class PostController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "postId") String sortBy,
-            @RequestParam(defaultValue = "desc") String direction) {
+            @RequestParam(defaultValue = "asc") String direction) {
 
         Page<PostListResponseDto> posts = postService.getAllPosts(page, size, sortBy, direction);
 
