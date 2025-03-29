@@ -27,6 +27,9 @@ public class SaveService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
 
+        // 나눠주기 하는 일이 많다
+        // 예외 처리 되나? 정확하게
+        // 게시글 조회까지 하기
         return saveRepository.findByUserAndPost(user, post)
                 .map(save -> {saveRepository.delete(save); return false; })
                 .orElseGet(() -> { saveRepository.save(new Save(user, post)); return true; });

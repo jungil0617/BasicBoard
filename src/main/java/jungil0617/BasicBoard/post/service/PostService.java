@@ -67,7 +67,7 @@ public class PostService {
 
         if(!post.getUser().getUsername().equals(username)) {
             throw new IllegalArgumentException("작성자만 삭제할 수 있습니다.");
-        }
+        } // 엔티티에서 처리 가능함
 
         postRepository.delete(post);
     }

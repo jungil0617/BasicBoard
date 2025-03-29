@@ -50,7 +50,7 @@ public class UserService {
         user.updateRefreshToken(refreshToken);
         userRepository.save(user);
 
-        return accessToken;
+        return accessToken; // 리프레시도 같이 넘겨줘야 합니다
     }
 
     @Transactional
