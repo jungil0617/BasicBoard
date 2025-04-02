@@ -63,8 +63,21 @@
 
 회원 가입
 
+## 예외 처리 방식
+
+- UserException
+  - USER_NOT_FOUND: 존재하지 않는 사용자입니다.
+  - DUPLICATE_USERNAME: 이미 존재하는 사용자명입니다.
+  - PASSWORD_MISMATCH: 비밀번호가 일치하지 않습니다.
+- PostException
+  - POST_NOT_FOUND: 존재하지 않는 게시글입니다.
+  - UNAUTHORIZED_ACCESS: 게시글에 대한 권한이 없습니다.
+- CommentException
+  - COMMENT_NOT_FOUND: 존재하지 않는 댓글입니다.
+  - UNAUTHORIZED_ACCESS: 댓글에 대한 권한이 없습니다.
+
 ## 향후 개선점 및 리팩토링 고려사항
-- 예외 처리 통합 및 예외 클래스 세분화
+
 
 ## TASK 설계
 - 프로젝트 초기 세팅
