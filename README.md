@@ -41,8 +41,8 @@
 
 <img alt="Image" src="https://github.com/user-attachments/assets/bec94f7e-ff7c-48b7-94e5-a1ebbd557350" />
 
-## Postman
-<img width="281" alt="Image" src="https://github.com/user-attachments/assets/22c47bd0-90cd-420c-b51a-b989f1f8faec" />
+## Swagger
+<img width="1312" alt="Image" src="https://github.com/user-attachments/assets/53a31d62-c9a6-4bee-9434-60dd814d9c82" />
 
 ## 기능 요구 사항
 게시판
@@ -65,9 +65,6 @@
 
 ## 향후 개선점 및 리팩토링 고려사항
 - 예외 처리 통합 및 예외 클래스 세분화
-  - 현재는 IllegalArgumentException을 공통적으로 사용하고 있다
-- Swagger 403 에러 해결해야 함
-- 저장한 게시글 목록 조회
 
 ## TASK 설계
 - 프로젝트 초기 세팅
@@ -91,6 +88,7 @@
 - 좋아요 및 저장 기능
   - 게시글 좋아요 / 취소 기능
   - 게시글 저장 / 취소 기능
+  - 저장한 게시글 조회
 
 - 댓글 기능
   - 작성
