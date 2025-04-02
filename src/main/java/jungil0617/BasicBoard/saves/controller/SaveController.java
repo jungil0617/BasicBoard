@@ -2,20 +2,23 @@ package jungil0617.BasicBoard.saves.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jungil0617.BasicBoard.post.dto.PostListResponseDto;
 import jungil0617.BasicBoard.saves.service.SaveService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/posts/{postId}/saves")
+@RequestMapping("/posts")
 public class SaveController {
 
     private final SaveService saveService;
 
-    @PostMapping
+    @PostMapping("/{postId}/saves")
     @Operation(
         summary = "게시글 저장 토글",
         responses = {
@@ -30,6 +33,20 @@ public class SaveController {
 
         String message = isSaved ? "저장" : "저장 취소";
         return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/saves")
+    @Operation(
+            summary = "저장한 게시글 목록 조회",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "저장한 게시글 목록 조회 성공"),
+                    @ApiResponse(responseCode = "401", description = "JWT 인증 실패")
+            }
+    )
+    public ResponseEntity<List<PostListResponseDto>> getSavedPosts(Authentication authentication) {
+        String username = authentication.getName();
+        List<PostListResponseDto> savedPosts = saveService.getSavedPosts(username);
+        return ResponseEntity.ok(savedPosts);
     }
 
 }
