@@ -43,7 +43,7 @@ public class PostController {
 
     @GetMapping("/{postId}")
     @Operation(
-        summary = "게시글 상세 조회",
+        summary = "게시글 조회",
         responses = {
             @ApiResponse(responseCode = "200", description = "게시글 상세 조회 성공"),
             @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없음"),
