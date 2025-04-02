@@ -2,6 +2,7 @@ package jungil0617.BasicBoard.comment.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jungil0617.BasicBoard.comment.dto.CommentRequestDto;
 import jungil0617.BasicBoard.comment.dto.CommentResponseDto;
 import jungil0617.BasicBoard.comment.service.CommentService;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/posts/{postId}/comments")
+@Tag(name = "Comment Api")
 public class CommentController {
 
     private final CommentService commentService;

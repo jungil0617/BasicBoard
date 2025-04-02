@@ -2,6 +2,7 @@ package jungil0617.BasicBoard.likes.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jungil0617.BasicBoard.likes.service.LikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/posts/{postId}/likes")
+@Tag(name = "Like Api")
 public class LikeController {
 
     private final LikeService likeService;

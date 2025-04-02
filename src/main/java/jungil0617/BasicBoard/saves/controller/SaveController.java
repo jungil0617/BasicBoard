@@ -2,6 +2,7 @@ package jungil0617.BasicBoard.saves.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jungil0617.BasicBoard.post.dto.PostListResponseDto;
 import jungil0617.BasicBoard.saves.service.SaveService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/posts")
+@Tag(name = "Save Api")
 public class SaveController {
 
     private final SaveService saveService;
