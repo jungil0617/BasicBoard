@@ -6,10 +6,8 @@ import jungil0617.BasicBoard.comment.exception.CommentValidator;
 import jungil0617.BasicBoard.comment.repository.CommentRepository;
 import jungil0617.BasicBoard.post.entity.Post;
 import jungil0617.BasicBoard.post.exception.PostValidator;
-import jungil0617.BasicBoard.post.repository.PostRepository;
 import jungil0617.BasicBoard.user.entity.User;
 import jungil0617.BasicBoard.user.exception.UserValidator;
-import jungil0617.BasicBoard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +19,6 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
     private final CommentValidator commentValidator;
     private final UserValidator userValidator;
     private final PostValidator postValidator;
