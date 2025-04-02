@@ -1,6 +1,7 @@
 package jungil0617.BasicBoard.user.service;
 
 import jungil0617.BasicBoard.global.jwt.JwtTokenProvider;
+import jungil0617.BasicBoard.user.dto.TokenResponse;
 import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
 import jungil0617.BasicBoard.user.entity.User;
@@ -36,7 +37,7 @@ public class UserService {
     }
 
     @Transactional
-    public String login(UserLoginRequestDto requestDto) {
+    public TokenResponse login(UserLoginRequestDto requestDto) {
         User user = userValidator.validateUserExists(requestDto.getUsername());
         userValidator.validatePassword(requestDto.getPassword(), user.getPassword());
 
@@ -46,7 +47,7 @@ public class UserService {
         user.updateRefreshToken(refreshToken);
         userRepository.save(user);
 
-        return accessToken; // 리프레시도 같이 넘겨줘야 합니다
+        return new TokenResponse(accessToken, refreshToken);
     }
 
     @Transactional

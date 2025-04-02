@@ -3,6 +3,7 @@ package jungil0617.BasicBoard.user.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jungil0617.BasicBoard.user.dto.TokenResponse;
 import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.UserNicknameUpdateRequestDto;
 import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
@@ -40,9 +41,9 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "로그인 성공 (AccessToken 반환)"),
             @ApiResponse(responseCode = "400", description = "비밀번호 불일치 또는 사용자 없음")}
     )
-    public ResponseEntity<String> login(@RequestBody UserLoginRequestDto requestDto) {
-        String accessToken = userService.login(requestDto);
-        return ResponseEntity.ok(accessToken);
+    public ResponseEntity<TokenResponse> login(@RequestBody UserLoginRequestDto requestDto) {
+        TokenResponse response = userService.login(requestDto);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/logout")
