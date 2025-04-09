@@ -23,7 +23,6 @@ public class LikeService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    // 좋아요 토글
     @Transactional
     public boolean like(String username, Long postId) {
         User user = userRepository.findByUsername(username)
@@ -32,9 +31,13 @@ public class LikeService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException(POST_NOT_FOUND));
 
+        return toggleLike(user, post);
+    }
+
+    private boolean toggleLike(User user, Post post) {
         return likeRepository.findByUserAndPost(user, post)
-                .map(like -> {likeRepository.delete(like); return false;})
-                .orElseGet(() -> {likeRepository.save(new Like(user, post)); return true;});
+                .map(like -> { likeRepository.delete(like); return false; })
+                .orElseGet(() -> { likeRepository.save(new Like(user, post)); return true; });
     }
 
     @Transactional(readOnly = true)

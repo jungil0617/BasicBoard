@@ -26,7 +26,6 @@ public class SaveService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    // 저장 토글
     @Transactional
     public boolean save(String username, Long postId) {
         User user = userRepository.findByUsername(username)
@@ -35,8 +34,12 @@ public class SaveService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException(POST_NOT_FOUND));
 
+        return toggleSave(user, post);
+    }
+
+    private boolean toggleSave(User user, Post post) {
         return saveRepository.findByUserAndPost(user, post)
-                .map(save -> {saveRepository.delete(save); return false; })
+                .map(save -> { saveRepository.delete(save); return false; })
                 .orElseGet(() -> { saveRepository.save(new Save(user, post)); return true; });
     }
 
