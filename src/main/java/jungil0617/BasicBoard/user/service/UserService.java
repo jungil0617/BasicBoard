@@ -5,12 +5,16 @@ import jungil0617.BasicBoard.user.dto.TokenResponse;
 import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
 import jungil0617.BasicBoard.user.entity.User;
+import jungil0617.BasicBoard.user.exception.UserErrorMessage;
+import jungil0617.BasicBoard.user.exception.UserException;
 import jungil0617.BasicBoard.user.exception.UserValidator;
 import jungil0617.BasicBoard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static jungil0617.BasicBoard.user.exception.UserErrorMessage.*;
 
 @Service
 @RequiredArgsConstructor
@@ -62,6 +66,20 @@ public class UserService {
 
         user.updateRefreshToken(null);
         userRepository.save(user);
+    }
+
+    @Transactional
+    public String reissueAccessToken(String refreshToken) {
+        String username = jwtTokenProvider.getUsernameFromToken(refreshToken);
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserException(USER_NOT_FOUND));
+
+        if (!refreshToken.equals(user.getRefreshToken())) {
+            throw new UserException(INVALID_REFRESH_TOKEN);
+        }
+
+        return jwtTokenProvider.generateAccessToken(username);
     }
 
 }

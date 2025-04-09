@@ -18,7 +18,7 @@ public class SecurityConfig {
 
     private final String[] permitAllUrls = {
             "/users/signup", "/users/login", "/posts/*/likes", "/swagger-ui.html", "/v3/api-docs/**",
-            "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/configuration/**", "/v3/**"};
+            "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/configuration/**", "/v3/**", "/users/reissue"};
 
     @Bean
     public PasswordEncoder passwordEncoder() {

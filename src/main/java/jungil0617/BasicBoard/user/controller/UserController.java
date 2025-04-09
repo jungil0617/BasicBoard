@@ -3,10 +3,7 @@ package jungil0617.BasicBoard.user.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jungil0617.BasicBoard.user.dto.TokenResponse;
-import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
-import jungil0617.BasicBoard.user.dto.UserNicknameUpdateRequestDto;
-import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
+import jungil0617.BasicBoard.user.dto.*;
 import jungil0617.BasicBoard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -89,6 +86,13 @@ public class UserController {
         String username = authentication.getName();
         userService.updateNickname(username, requestDto.getNickname());
         return ResponseEntity.ok(requestDto.getNickname());
+    }
+
+    @PostMapping("/reissue")
+    @Operation(summary = "Access Token 재발급")
+    public ResponseEntity<String> reissue(@RequestBody TokenReissueRequestDto request) {
+        String newAccessToken = userService.reissueAccessToken(request.refreshToken());
+        return ResponseEntity.ok(newAccessToken);
     }
 
 }
