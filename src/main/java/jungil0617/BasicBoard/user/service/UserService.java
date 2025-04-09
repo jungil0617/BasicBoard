@@ -5,16 +5,14 @@ import jungil0617.BasicBoard.user.dto.TokenResponse;
 import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
 import jungil0617.BasicBoard.user.entity.User;
-import jungil0617.BasicBoard.user.exception.UserErrorMessage;
-import jungil0617.BasicBoard.user.exception.UserException;
-import jungil0617.BasicBoard.user.exception.UserValidator;
+import jungil0617.BasicBoard.user.exception.*;
 import jungil0617.BasicBoard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static jungil0617.BasicBoard.user.exception.UserErrorMessage.*;
+import static jungil0617.BasicBoard.global.exception.ErrorMessage.*;
 
 @Service
 @RequiredArgsConstructor
@@ -23,11 +21,12 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserValidator userValidator;
 
     @Transactional
     public void signup(UserSignupRequestDto requestDto) {
-        userValidator.validateDuplicateUsername(requestDto.getUsername());
+        if (userRepository.findByUsername(requestDto.getUsername()).isPresent()) {
+            throw new DuplicateUsernameException(DUPLICATE_USERNAME);
+        }
 
         String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
 
@@ -42,8 +41,12 @@ public class UserService {
 
     @Transactional
     public TokenResponse login(UserLoginRequestDto requestDto) {
-        User user = userValidator.validateUserExists(requestDto.getUsername());
-        userValidator.validatePassword(requestDto.getPassword(), user.getPassword());
+        User user = userRepository.findByUsername(requestDto.getUsername())
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
+
+        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+            throw new PasswordMismatchException(PASSWORD_MISMATCH);
+        }
 
         String accessToken = jwtTokenProvider.generateAccessToken(user.getUsername());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUsername());
@@ -56,13 +59,15 @@ public class UserService {
 
     @Transactional
     public void updateNickname(String username, String newNickname) {
-        User user = userValidator.validateUserExists(username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
         user.updateNickname(newNickname);
     }
 
     @Transactional
     public void logout(String username) {
-        User user = userValidator.validateUserExists(username);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
 
         user.updateRefreshToken(null);
         userRepository.save(user);
@@ -73,10 +78,10 @@ public class UserService {
         String username = jwtTokenProvider.getUsernameFromToken(refreshToken);
 
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserException(USER_NOT_FOUND));
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
 
         if (!refreshToken.equals(user.getRefreshToken())) {
-            throw new UserException(INVALID_REFRESH_TOKEN);
+            throw new InvalidRefreshTokenException(INVALID_REFRESH_TOKEN);
         }
 
         return jwtTokenProvider.generateAccessToken(username);
