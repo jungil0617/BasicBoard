@@ -3,6 +3,8 @@ package jungil0617.BasicBoard.comment.entity;
 import jakarta.persistence.*;
 import jungil0617.BasicBoard.post.entity.Post;
 import jungil0617.BasicBoard.user.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Table(name = "comments")
+@AllArgsConstructor
+@Builder
 public class Comment {
 
     @Id
@@ -30,18 +34,12 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
+    @Builder.Default
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column
     private LocalDateTime updatedAt;
-
-    public Comment(User user, Post post, String content) {
-        this.user = user;
-        this.post = post;
-        this.content = content;
-        this.createdAt = LocalDateTime.now();
-    }
 
     public void update(String content) {
         this.content = content;

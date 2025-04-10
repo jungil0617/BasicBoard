@@ -35,8 +35,11 @@ public class CommentService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new PostNotFoundException(POST_NOT_FOUND));
 
-
-        Comment comment = new Comment(user, post, content);
+        Comment comment = Comment.builder()
+                .user(user)
+                .post(post)
+                .content(content)
+                .build();
 
         commentRepository.save(comment);
     }
