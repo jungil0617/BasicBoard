@@ -30,11 +30,11 @@ public class UserService {
 
         String encodedPassword = passwordEncoder.encode(requestDto.password());
 
-        User user = new User(
-                requestDto.username(),
-                encodedPassword,
-                requestDto.nickname()
-        );
+        User user = User.builder()
+                .username(requestDto.username())
+                .password(encodedPassword)
+                .nickname(requestDto.nickname())
+                .build();
 
         userRepository.save(user);
     }
