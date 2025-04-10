@@ -36,7 +36,7 @@ public class CommentController {
             @RequestBody CommentRequestDto requestDto,
             Authentication authentication) {
         String username = authentication.getName();
-        commentService.createComment(username, postId, requestDto.getComment());
+        commentService.createComment(username, postId, requestDto.comment());
         return ResponseEntity.status(201).body("댓글 작성 성공");
     }
 
@@ -70,7 +70,7 @@ public class CommentController {
             @RequestBody CommentRequestDto requestDto,
             Authentication authentication) {
         String username = authentication.getName();
-        commentService.updateComment(commentId, username, requestDto.getComment());
+        commentService.updateComment(commentId, username, requestDto.comment());
         return ResponseEntity.ok("댓글 수정 성공");
     }
 

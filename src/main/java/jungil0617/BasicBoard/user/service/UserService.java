@@ -24,16 +24,16 @@ public class UserService {
 
     @Transactional
     public void signup(UserSignupRequestDto requestDto) {
-        if (userRepository.findByUsername(requestDto.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(requestDto.username()).isPresent()) {
             throw new DuplicateUsernameException(DUPLICATE_USERNAME);
         }
 
-        String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
+        String encodedPassword = passwordEncoder.encode(requestDto.password());
 
         User user = new User(
-                requestDto.getUsername(),
+                requestDto.username(),
                 encodedPassword,
-                requestDto.getNickname()
+                requestDto.nickname()
         );
 
         userRepository.save(user);
@@ -41,10 +41,10 @@ public class UserService {
 
     @Transactional
     public TokenResponse login(UserLoginRequestDto requestDto) {
-        User user = userRepository.findByUsername(requestDto.getUsername())
+        User user = userRepository.findByUsername(requestDto.username())
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
 
-        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(requestDto.password(), user.getPassword())) {
             throw new PasswordMismatchException(PASSWORD_MISMATCH);
         }
 

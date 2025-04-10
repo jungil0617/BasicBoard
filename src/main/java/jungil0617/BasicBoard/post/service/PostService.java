@@ -30,7 +30,7 @@ public class PostService {
     @Transactional
     public void createPost(String username, PostRequestDto requestDto) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
-        Post post = new Post(user, requestDto.getTitle(), requestDto.getContent());
+        Post post = new Post(user, requestDto.title(), requestDto.content());
         postRepository.save(post);
     }
 
@@ -61,7 +61,7 @@ public class PostService {
             throw new UnauthorizedPostAccessException(POST_UNAUTHORIZED_ACCESS);
         }
 
-        post.update(requestDto.getTitle(), requestDto.getContent());
+        post.update(requestDto.title(), requestDto.content());
     }
 
     @Transactional

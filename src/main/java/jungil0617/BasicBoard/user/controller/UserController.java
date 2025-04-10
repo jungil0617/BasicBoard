@@ -84,8 +84,8 @@ public class UserController {
             @RequestBody UserNicknameUpdateRequestDto requestDto) {
 
         String username = authentication.getName();
-        userService.updateNickname(username, requestDto.getNickname());
-        return ResponseEntity.ok(requestDto.getNickname());
+        userService.updateNickname(username, requestDto.nickname());
+        return ResponseEntity.ok(requestDto.nickname());
     }
 
     @PostMapping("/reissue")
