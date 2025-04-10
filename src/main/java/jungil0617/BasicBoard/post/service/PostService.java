@@ -30,7 +30,12 @@ public class PostService {
     @Transactional
     public void createPost(String username, PostRequestDto requestDto) {
         User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND));
-        Post post = new Post(user, requestDto.title(), requestDto.content());
+        Post post = Post.builder()
+                .user(user)
+                .title(requestDto.title())
+                .content(requestDto.content())
+                .build();
+
         postRepository.save(post);
     }
 

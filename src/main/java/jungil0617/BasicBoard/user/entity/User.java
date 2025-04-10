@@ -30,9 +30,10 @@ public class User {
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
+    @Builder.Default
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Column(name = "refresh_token")
     private String refreshToken;
