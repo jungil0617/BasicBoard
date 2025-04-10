@@ -37,7 +37,11 @@ public class LikeService {
     private boolean toggleLike(User user, Post post) {
         return likeRepository.findByUserAndPost(user, post)
                 .map(like -> { likeRepository.delete(like); return false; })
-                .orElseGet(() -> { likeRepository.save(new Like(user, post)); return true; });
+                .orElseGet(() -> {
+                    Like like = Like.builder().user(user).post(post).build();
+                    likeRepository.save(like);
+                    return true;
+                });
     }
 
     @Transactional(readOnly = true)

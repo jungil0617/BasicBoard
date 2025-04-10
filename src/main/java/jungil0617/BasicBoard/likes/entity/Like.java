@@ -3,6 +3,8 @@ package jungil0617.BasicBoard.likes.entity;
 import jakarta.persistence.*;
 import jungil0617.BasicBoard.post.entity.Post;
 import jungil0617.BasicBoard.user.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Table(name = "likes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "post_id"})})
+@AllArgsConstructor
+@Builder
 public class Like {
 
     @Id
@@ -24,10 +28,5 @@ public class Like {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "post_id")
     private Post post;
-
-    public Like(User user, Post post) {
-        this.user = user;
-        this.post = post;
-    }
 
 }
