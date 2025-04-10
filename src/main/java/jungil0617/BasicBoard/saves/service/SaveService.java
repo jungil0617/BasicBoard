@@ -40,7 +40,11 @@ public class SaveService {
     private boolean toggleSave(User user, Post post) {
         return saveRepository.findByUserAndPost(user, post)
                 .map(save -> { saveRepository.delete(save); return false; })
-                .orElseGet(() -> { saveRepository.save(new Save(user, post)); return true; });
+                .orElseGet(() -> {
+                    Save save = Save.builder().user(user).post(post).build();
+                    saveRepository.save(save);
+                    return true;
+                });
     }
 
     @Transactional(readOnly = true)
