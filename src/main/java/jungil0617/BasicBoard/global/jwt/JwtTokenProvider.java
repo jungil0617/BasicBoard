@@ -13,8 +13,8 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     private final Key key;
-    private final long ACCESS_TOKEN_VALIDITY_SECONDS = 1000 * 60 * 30;
-    private final long REFRESH_TOKEN_VALIDITY_SECONDS = 1000 * 60 * 60 * 7 * 24;
+    private static final long ACCESS_TOKEN_VALIDITY_SECONDS = 1000 * 60 * 30; // 30분
+    private static final long REFRESH_TOKEN_VALIDITY_SECONDS = 1000 * 60 * 60 * 7 * 24; // 7일
 
     public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
         this.key = Keys.hmacShaKeyFor(secretKey.getBytes());
