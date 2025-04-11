@@ -2,7 +2,11 @@ package jungil0617.BasicBoard.user.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import jungil0617.BasicBoard.user.dto.*;
+import jungil0617.BasicBoard.user.dto.request.TokenReissueRequestDto;
+import jungil0617.BasicBoard.user.dto.request.UserLoginRequestDto;
+import jungil0617.BasicBoard.user.dto.request.UserNicknameUpdateRequestDto;
+import jungil0617.BasicBoard.user.dto.request.UserSignupRequestDto;
+import jungil0617.BasicBoard.user.dto.response.TokenResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestBody;

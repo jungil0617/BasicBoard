@@ -1,8 +1,8 @@
 package jungil0617.BasicBoard.post.service;
 
-import jungil0617.BasicBoard.post.dto.PostListResponseDto;
-import jungil0617.BasicBoard.post.dto.PostRequestDto;
-import jungil0617.BasicBoard.post.dto.PostResponseDto;
+import jungil0617.BasicBoard.post.dto.response.PostListResponseDto;
+import jungil0617.BasicBoard.post.dto.request.PostRequestDto;
+import jungil0617.BasicBoard.post.dto.response.PostResponseDto;
 import jungil0617.BasicBoard.post.entity.Post;
 import jungil0617.BasicBoard.post.exception.PostNotFoundException;
 import jungil0617.BasicBoard.post.exception.UnauthorizedPostAccessException;

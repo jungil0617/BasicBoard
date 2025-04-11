@@ -1,4 +1,4 @@
-package jungil0617.BasicBoard.post.dto;
+package jungil0617.BasicBoard.post.dto.response;
 
 import jungil0617.BasicBoard.post.entity.Post;
 

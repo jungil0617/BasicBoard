@@ -1,4 +1,4 @@
-package jungil0617.BasicBoard.comment.dto;
+package jungil0617.BasicBoard.comment.dto.response;
 
 import jungil0617.BasicBoard.comment.entity.Comment;
 

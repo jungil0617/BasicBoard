@@ -1,7 +1,11 @@
 package jungil0617.BasicBoard.user.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jungil0617.BasicBoard.user.dto.*;
+import jungil0617.BasicBoard.user.dto.request.TokenReissueRequestDto;
+import jungil0617.BasicBoard.user.dto.request.UserLoginRequestDto;
+import jungil0617.BasicBoard.user.dto.request.UserNicknameUpdateRequestDto;
+import jungil0617.BasicBoard.user.dto.request.UserSignupRequestDto;
+import jungil0617.BasicBoard.user.dto.response.TokenResponse;
 import jungil0617.BasicBoard.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

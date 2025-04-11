@@ -1,6 +1,6 @@
 package jungil0617.BasicBoard.comment.service;
 
-import jungil0617.BasicBoard.comment.dto.CommentResponseDto;
+import jungil0617.BasicBoard.comment.dto.response.CommentResponseDto;
 import jungil0617.BasicBoard.comment.entity.Comment;
 import jungil0617.BasicBoard.comment.exception.CommentNotFoundException;
 import jungil0617.BasicBoard.comment.exception.UnauthorizedCommentAccessException;

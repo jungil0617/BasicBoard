@@ -1,9 +1,9 @@
 package jungil0617.BasicBoard.user.service;
 
 import jungil0617.BasicBoard.global.jwt.JwtTokenProvider;
-import jungil0617.BasicBoard.user.dto.TokenResponse;
-import jungil0617.BasicBoard.user.dto.UserLoginRequestDto;
-import jungil0617.BasicBoard.user.dto.UserSignupRequestDto;
+import jungil0617.BasicBoard.user.dto.response.TokenResponse;
+import jungil0617.BasicBoard.user.dto.request.UserLoginRequestDto;
+import jungil0617.BasicBoard.user.dto.request.UserSignupRequestDto;
 import jungil0617.BasicBoard.user.entity.User;
 import jungil0617.BasicBoard.user.exception.*;
 import jungil0617.BasicBoard.user.repository.UserRepository;

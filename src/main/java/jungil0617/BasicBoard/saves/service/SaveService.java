@@ -1,6 +1,6 @@
 package jungil0617.BasicBoard.saves.service;
 
-import jungil0617.BasicBoard.post.dto.PostListResponseDto;
+import jungil0617.BasicBoard.post.dto.response.PostListResponseDto;
 import jungil0617.BasicBoard.post.entity.Post;
 import jungil0617.BasicBoard.post.exception.PostNotFoundException;
 import jungil0617.BasicBoard.post.repository.PostRepository;
