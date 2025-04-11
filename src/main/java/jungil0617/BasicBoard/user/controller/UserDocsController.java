@@ -2,6 +2,7 @@ package jungil0617.BasicBoard.user.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 import jungil0617.BasicBoard.user.dto.request.TokenReissueRequestDto;
 import jungil0617.BasicBoard.user.dto.request.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.request.UserNicknameUpdateRequestDto;
@@ -19,7 +20,7 @@ public interface UserDocsController {
                     @ApiResponse(responseCode = "201", description = "회원가입 성공"),
                     @ApiResponse(responseCode = "400", description = "중복된 사용자명 또는 유효하지 않은 값")}
     )
-    ResponseEntity<String> signup(@RequestBody UserSignupRequestDto requestDto);
+    ResponseEntity<String> signup(@Valid @RequestBody UserSignupRequestDto requestDto);
 
     @Operation(
             summary = "로그인",
@@ -27,7 +28,7 @@ public interface UserDocsController {
                     @ApiResponse(responseCode = "200", description = "로그인 성공 (AccessToken 반환)"),
                     @ApiResponse(responseCode = "400", description = "비밀번호 불일치 또는 사용자 없음")}
     )
-    ResponseEntity<TokenResponse> login(@RequestBody UserLoginRequestDto requestDto);
+    ResponseEntity<TokenResponse> login(@Valid @RequestBody UserLoginRequestDto requestDto);
 
     @Operation(
             summary = "로그아웃",
@@ -55,9 +56,9 @@ public interface UserDocsController {
                     @ApiResponse(responseCode = "401", description = "인증 실패 또는 JWT 누락")
             }
     )
-    ResponseEntity<String> updateNickname(Authentication authentication, @RequestBody UserNicknameUpdateRequestDto requestDto);
+    ResponseEntity<String> updateNickname(Authentication authentication, @Valid @RequestBody UserNicknameUpdateRequestDto requestDto);
 
     @Operation(summary = "Access Token 재발급")
-    ResponseEntity<String> reissue(@RequestBody TokenReissueRequestDto request);
+    ResponseEntity<String> reissue(@Valid @RequestBody TokenReissueRequestDto request);
 
 }

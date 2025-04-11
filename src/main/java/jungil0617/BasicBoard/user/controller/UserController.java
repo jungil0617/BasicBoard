@@ -1,6 +1,7 @@
 package jungil0617.BasicBoard.user.controller;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jungil0617.BasicBoard.user.dto.request.TokenReissueRequestDto;
 import jungil0617.BasicBoard.user.dto.request.UserLoginRequestDto;
 import jungil0617.BasicBoard.user.dto.request.UserNicknameUpdateRequestDto;
@@ -22,13 +23,13 @@ public class UserController implements UserDocsController {
     private final UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody UserSignupRequestDto requestDto) {
+    public ResponseEntity<String> signup(@Valid @RequestBody UserSignupRequestDto requestDto) {
         userService.signup(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("회원가입");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> login(@RequestBody UserLoginRequestDto requestDto) {
+    public ResponseEntity<TokenResponse> login(@Valid @RequestBody UserLoginRequestDto requestDto) {
         TokenResponse response = userService.login(requestDto);
         return ResponseEntity.ok(response);
     }
@@ -49,7 +50,7 @@ public class UserController implements UserDocsController {
     @PatchMapping("/nickname")
     public ResponseEntity<String> updateNickname(
             Authentication authentication,
-            @RequestBody UserNicknameUpdateRequestDto requestDto) {
+            @Valid @RequestBody UserNicknameUpdateRequestDto requestDto) {
 
         String username = authentication.getName();
         userService.updateNickname(username, requestDto.nickname());
@@ -57,7 +58,7 @@ public class UserController implements UserDocsController {
     }
 
     @PostMapping("/reissue")
-    public ResponseEntity<String> reissue(@RequestBody TokenReissueRequestDto request) {
+    public ResponseEntity<String> reissue(@Valid @RequestBody TokenReissueRequestDto request) {
         String newAccessToken = userService.reissueAccessToken(request.refreshToken());
         return ResponseEntity.ok(newAccessToken);
     }
