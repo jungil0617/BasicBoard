@@ -4,12 +4,12 @@ import jungil0617.BasicBoard.post.entity.Post;
 
 import java.time.LocalDateTime;
 
-public record PostListResponseDto (
+public record PostListResponseDto(
         Long postId,
         String title,
         int viewCount,
         LocalDateTime createdAt
-){
+) {
     public static PostListResponseDto fromEntity(Post post) {
         return new PostListResponseDto(
                 post.getPostId(),

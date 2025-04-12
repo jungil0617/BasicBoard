@@ -4,7 +4,7 @@ import jungil0617.BasicBoard.comment.entity.Comment;
 
 import java.time.LocalDateTime;
 
-public record CommentResponseDto (
+public record CommentResponseDto(
         Long commentId,
         String content,
         String nickname,

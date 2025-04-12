@@ -2,6 +2,7 @@ package jungil0617.BasicBoard.user.repository;
 
 import jungil0617.BasicBoard.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {

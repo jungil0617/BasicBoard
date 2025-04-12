@@ -10,4 +10,5 @@ public record PostResponseDto(
         int viewCount,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
-) {}
+) {
+}
