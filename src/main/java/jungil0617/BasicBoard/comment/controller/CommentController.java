@@ -3,6 +3,7 @@ package jungil0617.BasicBoard.comment.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import jungil0617.BasicBoard.comment.dto.request.CommentRequestDto;
 import jungil0617.BasicBoard.comment.dto.response.CommentResponseDto;
 import jungil0617.BasicBoard.comment.service.CommentService;
@@ -33,7 +34,7 @@ public class CommentController {
     )
     public ResponseEntity<String> createComment(
             @PathVariable Long postId,
-            @RequestBody CommentRequestDto requestDto,
+            @Valid @RequestBody CommentRequestDto requestDto,
             Authentication authentication) {
         String username = authentication.getName();
         commentService.createComment(username, postId, requestDto.comment());
@@ -67,7 +68,7 @@ public class CommentController {
     public ResponseEntity<String> updateComment(
             @PathVariable Long postId,
             @PathVariable Long commentId,
-            @RequestBody CommentRequestDto requestDto,
+            @Valid @RequestBody CommentRequestDto requestDto,
             Authentication authentication) {
         String username = authentication.getName();
         commentService.updateComment(commentId, username, requestDto.comment());

@@ -1,3 +1,7 @@
 package jungil0617.BasicBoard.comment.dto.request;
 
-public record CommentRequestDto(String comment) {}
+import jakarta.validation.constraints.NotBlank;
+
+public record CommentRequestDto(
+        @NotBlank(message = "내용이 비어있습니다.") String comment) {
+}
