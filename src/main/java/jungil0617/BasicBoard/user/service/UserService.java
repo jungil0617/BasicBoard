@@ -48,8 +48,6 @@ public class UserService {
             throw new PasswordMismatchException(PASSWORD_MISMATCH);
         }
 
-        user.validatePassword(requestDto.password());
-
         String accessToken = jwtTokenProvider.generateAccessToken(user.getUsername());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUsername());
 
