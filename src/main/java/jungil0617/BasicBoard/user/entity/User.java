@@ -47,10 +47,4 @@ public class User {
         this.nickname = nickname;
     }
 
-    public void validatePassword(String password) {
-        if (!this.password.equals(password)) {
-            throw new PasswordMismatchException(ErrorMessage.PASSWORD_MISMATCH);
-        }
-    }
-
 }
