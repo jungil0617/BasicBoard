@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/posts")
 @Tag(name = "Save Api")
-public class SaveController implements SaveDocsController{
+public class SaveController implements SaveDocsController {
 
     private final SaveService saveService;
 
