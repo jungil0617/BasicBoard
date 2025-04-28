@@ -1,6 +1,8 @@
 package jungil0617.BasicBoard.user.entity;
 
 import jakarta.persistence.*;
+import jungil0617.BasicBoard.global.exception.ErrorMessage;
+import jungil0617.BasicBoard.user.exception.PasswordMismatchException;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,6 +45,12 @@ public class User {
 
     public void updateNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public void validatePassword(String password) {
+        if (!this.password.equals(password)) {
+            throw new PasswordMismatchException(ErrorMessage.PASSWORD_MISMATCH);
+        }
     }
 
 }
